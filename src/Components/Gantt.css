@@ -1,0 +1,13 @@
+#chart_div {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  width: 500px;
+  height: 550px;
+}
+
+#reactgooglegraph-2,
+#reactgooglegraph-1 {
+  width: 100%;
+  height: calc(100% - 30px) !important;
+  overflow: auto !important;
+}

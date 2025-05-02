@@ -1,0 +1,27 @@
+.ant-table-thead > tr > th{
+  background-color: #FFFF !important;
+  color: #7D9EB5 !important;
+  border-bottom:1px solid #7D9EB5 !important;
+}
+
+.ant-table-thead > tr > th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before{
+  background-color: transparent !important;
+}
+
+td{
+  vertical-align: middle !important;
+}
+
+.ant-form-item-label > label{
+  color: #7D9EB5 !important;
+  font-weight: bold;
+  font-size:16px !important;
+}
+
+.ant-input{
+  color: #223244 !important;
+}
+
+/* #mail-table .ant-spin-container .ant-table-body {
+  height: 700px !important;
+} */

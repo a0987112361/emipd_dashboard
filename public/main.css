@@ -1,0 +1,15 @@
+html,
+body,
+#root {
+  display: flex;
+  flex: 1;
+  height: 100%;
+  overflow-y: hidden;
+  font-family: Microsoft JhengHei;
+
+}
+
+ol,
+ul {
+  list-style: decimal !important;
+}

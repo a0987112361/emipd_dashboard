@@ -1,0 +1,33 @@
+.App {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.board {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  white-space: nowrap;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.add-card {
+  width: 256px;
+  height: 32px;
+  min-height: 32px;
+  background-color: white;
+  margin: 8px 12px;
+  padding: 0px 12px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  border: 1px #8a8484 dashed;
+  color: #8a8484;
+  cursor: pointer;
+}
+
+.add-card:hover {
+  background-color: #f2f2f2;
+}

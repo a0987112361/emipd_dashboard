@@ -1,0 +1,38 @@
+.ant-table-pagination {
+  margin: 16px 0px 0px 0px !important;
+}
+
+.pin {
+  background-color: black;
+  color           : white;
+}
+
+.pin td {
+  background-color: black !important;
+}
+
+.pin .ant-progress-text {
+  color: white;
+}
+
+.done {
+  background-color: #999999;
+  color           : white;
+}
+
+.done td {
+  background-color: #999999 !important;
+}
+
+.done .ant-progress-text {
+  color: white;
+}
+
+.ant-table-pagination {
+  display: flex !important;
+  align-items: center !important;
+}
+/* 
+.ant-table table {
+  width: 100%;
+} */

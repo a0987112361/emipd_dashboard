@@ -1,0 +1,74 @@
+.ant-tabs {
+  width: 100% !important;
+}
+
+.ant-tabs-tab {
+  /* background-color: #FFEFD3 !important; */
+  width              : 125px !important;
+  color              : #004C7C !important;
+  border-bottom      : 0px !important;
+  display            : flex;
+  justify-content    : center;
+  /* margin-right    : 12px !important;
+  margin-left        : 15px !important; */
+  font-size          : 16px !important;
+  font-weight        : bold;
+  padding            : 20px 0px 15px 0px !important;
+}
+
+.ant-tabs-tab-btn {
+  color: #004C7C !important;
+}
+
+
+.ant-tabs-ink-bar {
+  background: #004C7C !important;
+}
+
+.ant-form-item-label>label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
+  color:#7D9EB5 !important;
+}
+
+.ant-picker {
+  height       : 40px !important;
+  border-radius: 5px !important;
+}
+
+.ant-tabs-nav {
+  margin-bottom: 0px !important;
+}
+
+.ant-select {
+  line-height: 40px !important;
+}
+
+.ant-select-single .ant-select-selector .ant-select-selection-item,
+.ant-select-single .ant-select-selector .ant-select-selection-placeholder,
+.ant-select-selection-item {
+  line-height: 40px !important;
+}
+
+.ant-select-selection-overflow {
+  line-height: 36px !important;
+}
+
+.ant-select-selection-item,
+.ant-select-selection-item-content,
+.ant-select-selection-item-remove {
+  height     : 28px !important;
+  line-height: 28px !important;
+}
+
+.ant-tabs {
+  color: #C2D7E6 !important;
+}
+.ant-tabs-tab.ant-tabs-tab-active {
+  border-bottom: 4px solid #004c7c !important;
+}
+.ant-tabs > .ant-tabs-nav .ant-tabs-nav-wrap {
+  border-bottom: 1px solid #C2D7E6 !important;
+}
+
+.ant-form-item {
+  margin: 8px 0px !important;
+}

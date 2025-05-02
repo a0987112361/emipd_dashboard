@@ -1,0 +1,10 @@
+.multiLine {
+  display                                                                                   : -webkit-box;
+  word-break                                                                                : break-all;
+  text-overflow                                                                             : ellipsis;
+  overflow                                                                                  : hidden;
+  -webkit-line-clamp                                                                        : 2;
+  /* autoprefixer                                                                           : off */
+  -webkit-box-orient                                                                        : vertical;
+  /* autoprefixer                                                                           : on */
+}

@@ -1,0 +1,9 @@
+.longSearchInput::placeholder {
+  color: white !important;
+}
+
+.longSearchInput:focus {
+  width: 400px !important;
+  height: 50px !important;
+  /* transition: width 0.3s ease; */
+}

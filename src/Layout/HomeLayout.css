@@ -1,0 +1,156 @@
+#components-layout-demo-custom-trigger .trigger {
+  padding    : 0 24px;
+  font-size  : 18px;
+  line-height: 65px;
+  cursor     : pointer;
+  transition : color 0.3s;
+}
+
+#components-layout-demo-custom-trigger .trigger:hover {
+  color: #1890ff;
+}
+
+#components-layout-demo-custom-trigger .logo {
+  height       : 32px !important;
+  margin-bottom: 16px !important;
+  background   : rgba(255, 255, 255, 0.3);
+}
+
+.ant-dropdown-link {
+  color: black;
+}
+
+/* content  */
+.site-layout .site-layout-background-top {
+  background     : #fff;
+  box-shadow     : 0px 2px 10px #859DB1 !important;
+  z-index        : 999 !important;
+  display        : flex;
+  align-items    : center;
+  justify-content: space-between;
+  padding        : 0px 20px !important;
+  height         : 65px !important;
+}
+
+.site-layout .site-layout-background-content {
+  background: linear-gradient(#F8FDFE, #DFF6F4);
+}
+
+/* menu */
+.ant-layout-sider {
+  background: linear-gradient(rgba(41, 114, 188, 0.7), #15395E) !important;
+}
+
+
+.ant-menu.ant-menu-dark {
+  background: #0C2556 !important;
+}
+
+.ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  background-color: #2972BC !important;
+}
+
+.ant-menu-dark .ant-menu-item:hover {
+  background-color: #2972BC !important;
+}
+
+.ant-menu-dark .ant-menu-item {
+  color: #fff !important;
+}
+
+.ant-menu-vertical .ant-menu-item,
+.ant-menu-inline .ant-menu-item {
+  margin: 0px !important;
+}
+
+.ant-menu-item .anticon+span {
+  margin-left: 20px !important;
+}
+
+/* 每頁表格的表頭固定後，表格內容樣式需再設定一次 */
+/* .ant-spin-container .ant-table {
+  font-size: 16px !important;
+  color: #004C7C !important;
+  font-weight: normal !important;
+} */
+
+/* 每頁表格的表格內容自動撐開，呈現表頭置頂、頁碼永遠最底的效果 */
+.ant-spin-container .ant-table-body {
+  height: 700px !important;
+}
+
+
+.teacher-del-btn {
+  border: 1px solid #0c2556 !important;
+  border-radius: 100px !important;
+  cursor: pointer !important;
+  background: #f7fdfe !important;
+  padding: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.teacher-del-btn:hover {
+  border: 1px solid #e21d53 !important;
+  background: rgb(226, 29, 83, 0.1) !important;
+  transition: all 0.5s ease-out !important;
+}
+
+.ant-upload-list-item-info .anticon-loading .anticon, .ant-upload-list-item-info .ant-upload-text-icon .anticon {
+  color: rgb(0 76 124 / 83%) !important;
+}
+
+.ant-upload-list-text .ant-upload-list-item-name, .ant-upload-list-picture .ant-upload-list-item-name {
+  color: #062233 !important;
+}
+
+.ant-upload-list-item-card-actions .anticon {
+  color: rgb(198 7 7 / 60%) !important;
+}
+
+.ant-upload-list-item-card-actions .anticon:hover {
+  color: rgb(198 7 7 / 87%) !important;
+}
+
+.ant-upload.ant-upload-drag {
+  background-color: rgb(250 250 250) !important;
+  border: 2px dashed rgb(225 225 225) !important;
+}
+
+.ant-upload.ant-upload-drag p.ant-upload-text {
+  color: rgb(125 158 181)!important;
+  font-weight: 500!important;
+}
+
+.ant-upload.ant-upload-drag p.ant-upload-hint {
+  color: rgb(162 185 201)!important;
+  font-size: 14px;
+}
+
+.drag-pics-area .ant-upload-list-picture-card-container {
+  width: 80px !important;
+  height: 80px !important;
+  margin: 10px 3px 0px 3px !important;
+}
+
+.ant-segmented {
+  background-color: #ddd !important;
+  border-radius: 20px !important;
+}
+
+.ant-segmented.ant-segmented-lg .ant-segmented-item-label {
+  font-size: 14px !important;
+  line-height: 37px !important;
+  padding: 1px 11px !important;
+}
+
+.ant-segmented-item-selected {
+  font-weight: bold !important;
+  color: #004c7c !important;
+  background-color: #fff !important;
+  border-radius: 20px !important;
+}
+
+.ant-btn[disabled], .ant-btn[disabled]:hover, .ant-btn[disabled]:focus, .ant-btn[disabled]:active{
+  background: #ddd !important;
+}

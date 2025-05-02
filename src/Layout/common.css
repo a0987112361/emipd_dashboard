@@ -1,0 +1,11 @@
+.ant-list-lg .ant-list-item {
+  padding: 8px 0px !important;
+}
+
+.ant-popover-inner-content {
+  padding: 0px 0px 0px 0px !important;
+}
+
+/* .ant-popover {
+  z-index: 11 !important;
+} */

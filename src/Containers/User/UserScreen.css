@@ -1,0 +1,108 @@
+.ant-select-selector {
+  /* height       : 40px !important; */
+  border-radius: 5px !important;
+}
+
+.ant-select-single:not(.ant-select-customize-input) .ant-select-selector::after {
+  line-height: 40px !important;
+}
+
+.ant-form-item-label>label {
+  color: #7D9EB5 !important;
+}
+
+/* table */
+/* #table {
+  height: 700px;
+} */
+
+.ant-table-content {
+  color        : #004C7C !important;
+  font-size    : 18px !important;
+  font-weight  : normal !important;
+  border-bottom: #C2D7E6 1px solid !important;
+}
+
+.ant-table-thead>tr>th {
+  background-color: #FFFF !important;
+  color           : #7D9EB5 !important;
+  border-bottom   : 1px solid #7D9EB5 !important;
+}
+
+.ant-table-thead>tr>th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
+  background-color: transparent !important;
+}
+
+td {
+  vertical-align: middle !important;
+}
+
+.ant-form-item-label>label {
+  color      : #7D9EB5 !important;
+  font-weight: bold;
+  font-size  : 16px !important;
+}
+
+td.ant-table-column-sort {
+  background: #fff !important;
+}
+
+/* 分頁 */
+.ant-table-pagination.ant-pagination {
+  margin    : 0px !important;
+  padding   : 16px 0px !important;
+  background: #fff !important;
+}
+
+.ant-pagination-item:focus-visible a,
+.ant-pagination-item:hover a,
+.ant-pagination-item-active a {
+  color: black !important;
+}
+
+.ant-pagination-item-active {
+  background   : #37FEED !important;
+  border       : 0px !important;
+  border-radius: 50% !important;
+  color        : black !important;
+}
+
+.ant-pagination-item,
+.ant-pagination-item-link {
+  border: 0px !important;
+}
+
+.ant-pagination-next a,
+.ant-pagination-prev a {
+  color: #7D9EB5 !important;
+}
+
+.ant-pagination-next a:hover,
+.ant-pagination-prev a:hover {
+  color: black !important;
+}
+
+/*checkDelete*/
+.swal2-icon.swal2-warning {
+  background-color: #E21D53 !important;
+  color           : #fff !important;
+  border          : 0px !important;
+}
+
+/* .ant-result-info .ant-result-icon>.anticon {
+  color: #E21D53 !important;
+}
+
+.ant-result-title {
+  font-weight: bold;
+  color      : #004C7C !important;
+}
+
+.ant-result-subtitle {
+  font-size: 16px !important;
+  color    : #004C7C !important;
+} */
+
+/* #user-table .ant-table-body {
+  height: 540px !important;
+} */
