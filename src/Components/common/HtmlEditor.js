@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 import PropTypes from "prop-types";
-import ReactQuill from "react-quill"; // 引入 react-quill
-import "react-quill/dist/quill.snow.css"; // 引入 Quill 的樣式
+import "braft-editor/dist/index.css";
+import BraftEditor from "braft-editor";
 import { Form } from "antd";
 
 class HtmlEditor extends React.Component {
@@ -14,34 +14,22 @@ class HtmlEditor extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      editorHtml: props.value || "", // 設定初始值為 props 中的 value
+      editValue: BraftEditor.createEditorState(props.value),
     };
-    this.quillRef = React.createRef(); // 用來引用 ReactQuill 實例
   }
 
   componentDidMount() {
     const { value } = this.props;
-    console.log(value);
     this.setState({
-      editorHtml: value,
+      editValue: BraftEditor.createEditorState(value),
     });
   }
-
-  onChangeValue = () => {
+  onChangeValue = (value) => {
     const { onEditorStateChange } = this.props;
-    let htmlContent = ""; // ✅ 先宣告，避免 reference error
-
-    if (this.quillRef && this.quillRef.current) {
-      htmlContent = this.quillRef.current.getEditor().root.innerHTML;
-    }
-
-    // 更新 state 並將 HTML 傳遞給父層
     this.setState({
-      editorHtml: htmlContent,
+      editValue: value,
     });
-
-    // 呼叫父層函數傳遞 HTML 內容
-    onEditorStateChange(htmlContent);
+    onEditorStateChange(value.toHTML());
   };
 
   static defaultProps = {
@@ -56,7 +44,7 @@ class HtmlEditor extends React.Component {
   };
 
   render() {
-    const { editorHtml } = this.state;
+    const { editValue } = this.state;
     const {
       title,
       style,
@@ -87,19 +75,23 @@ class HtmlEditor extends React.Component {
         labelCol={{ span: labelCol }}
         wrapperCol={{ span: wrapperCol }}
       >
-        <ReactQuill
-          ref={this.quillRef} // 設定引用
-          value={editorHtml}
+        <BraftEditor
+          value={editValue}
+          language="zh-hant"
+          defaultValue={editValue}
           onChange={this.onChangeValue}
-          placeholder={this.props.placeholder} // 設置 placeholder
-          modules={{
-            toolbar: [
-              [{ header: "1" }, { header: "2" }, { font: [] }],
-              [{ list: "ordered" }, { list: "bullet" }],
-              ["bold", "italic", "underline", "link"],
-            ],
+          contentStyle={{
+            height: "100%",
+            overflowY: "auto",
+            overflowX: "hidden",
+            padding: "10px",
+            zIndex: "-1",
+            backgroundColor: "#ffffff",
+            minHeight: "300px",
+            maxHeight: "800px",
+            width: "100%",
+            ...editorStyle,
           }}
-          formats={["bold", "italic", "underline", "link", "header", "list"]}
           style={{
             height: "100%",
             padding: "10px",
@@ -116,5 +108,4 @@ class HtmlEditor extends React.Component {
     );
   }
 }
-
 export default HtmlEditor;

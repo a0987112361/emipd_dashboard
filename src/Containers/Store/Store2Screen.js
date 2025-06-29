@@ -760,16 +760,15 @@ class Store2Screen extends React.Component {
 
   // html編輯器
   handleChangeContent = (text, value) => {
-    if (text == "aboutContentZh") {
-      this.setState({ aboutContentZh: value.toHTML() });
-    } else if (text == "aboutContentEn") {
-      this.setState({ aboutContentEn: value.toHTML() });
-    } else if (text == "aboutContent2Zh") {
-      this.setState({ aboutContent2Zh: value.toHTML() });
-    } else if (text == "aboutContent2En") {
-      this.setState({ aboutContent2En: value.toHTML() });
-      // }else if (text == 'enIntro'){
-      //   this.setState({ enIntroContent: value.toHTML() });
+    const validFields = [
+      "aboutContentZh",
+      "aboutContentEn",
+      "aboutContent2Zh",
+      "aboutContent2En",
+    ];
+
+    if (validFields.includes(text)) {
+      this.setState({ [text]: value });
     }
   };
 

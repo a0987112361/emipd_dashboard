@@ -370,12 +370,12 @@ class NewsScreen extends React.Component {
 
       // 把該刪除的檔案「刪除」
       removeFileData.map((item, index) => {
-        formData.append('delete_files[' + index + ']', item);
+        formData.append("delete_files[" + index + "]", item);
       });
       // 新上傳檔案
       fileData.map((item, index) => {
-        formData.append('upload_files', item.originFileObj);
-      })
+        formData.append("upload_files", item.originFileObj);
+      });
     } else {
       if (fileData.length > 0) {
         fileData.map((item) => {
@@ -523,10 +523,11 @@ class NewsScreen extends React.Component {
 
   //html編輯器
   handleChangeContent = (text, value) => {
+    console.log("value =>", value);
     if (text == "newsContentZh") {
-      this.setState({ newsContentZh: value.toHTML() });
+      this.setState({ newsContentZh: value });
     } else if (text == "newsContentEn") {
-      this.setState({ newsContentEn: value.toHTML() });
+      this.setState({ newsContentEn: value });
     }
   };
 
