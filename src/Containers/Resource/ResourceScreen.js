@@ -938,6 +938,7 @@ class ResourceScreen extends React.Component {
                                   <Upload
                                     customRequest={dummyRequest}
                                     beforeUpload={() => false}
+                                    maxCount={1}
                                   >
                                     <Button icon={<UploadOutlined />}>
                                       上傳檔案
@@ -959,6 +960,7 @@ class ResourceScreen extends React.Component {
                                   <Upload
                                     customRequest={dummyRequest}
                                     beforeUpload={() => false}
+                                    maxCount={1}
                                   >
                                     <Button icon={<UploadOutlined />}>
                                       上傳檔案

@@ -1,141 +1,155 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Layout, Menu, Badge, Dropdown, Modal, Form, Input, Button, Upload } from 'antd';
-import { MenuOutlined, UserOutlined, DownOutlined } from '@ant-design/icons';
-import { FormInput, FixSideBar } from 'src/Components';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import Swal from 'sweetalert2';
-import './HomeLayout.css';
-import { UserActions, ScreenActions, } from 'src/Stores';
-import { Images, Colors, } from 'src/Theme';
-import hashHistory from 'src/utils/HashHistory';
-import { removeUserInformation } from 'src/utils/localStorage';
-import _, { isEmpty } from 'lodash';
+import React from "react";
+import PropTypes from "prop-types";
+import {
+  Layout,
+  Menu,
+  Badge,
+  Dropdown,
+  Modal,
+  Form,
+  Input,
+  Button,
+  Upload,
+} from "antd";
+import { MenuOutlined, UserOutlined, DownOutlined } from "@ant-design/icons";
+import { FormInput, FixSideBar } from "src/Components";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import Swal from "sweetalert2";
+import "./HomeLayout.css";
+import { UserActions, ScreenActions } from "src/Stores";
+import { Images, Colors } from "src/Theme";
+import hashHistory from "src/utils/HashHistory";
+import { removeUserInformation } from "src/utils/localStorage";
+import _, { isEmpty } from "lodash";
 
 const { Header, Sider, Content } = Layout;
 
-
 const styles = {
   infoStyle: {
-    width: '250px',
-    display: 'flex',
-    justifyContent: 'end',
-    alignItems: 'center',
-    paddingRight: '8px'
+    width: "250px",
+    display: "flex",
+    justifyContent: "end",
+    alignItems: "center",
+    paddingRight: "8px",
   },
   iconStyle: {
-    width: '20px',
-    height: '20px',
-    cursor: 'pointer'
+    width: "20px",
+    height: "20px",
+    cursor: "pointer",
   },
   btnStyle: {
-    backgroundColor: '#004C7C',
-    width: '103px',
-    height: '40px',
-    color: 'white',
-    borderRadius: '4px',
+    backgroundColor: "#004C7C",
+    width: "103px",
+    height: "40px",
+    color: "white",
+    borderRadius: "4px",
   },
   inputStyle: {
-    border: '1px solid #7D9EB5',
-    borderRadius: '5px',
-    height: '40px',
-    width: '100%',
-    paddingLeft: '8px',
-    color: '#455A68',
-    marginBottom: '10px'
+    border: "1px solid #7D9EB5",
+    borderRadius: "5px",
+    height: "40px",
+    width: "100%",
+    paddingLeft: "8px",
+    color: "#455A68",
+    marginBottom: "10px",
   },
   noticeStyle: {
-    backgroundColor: 'red',
-    width: '30px',
-    height: '30px',
-    borderRadius: '15px',
-    lineHeight: '30px',
-    textAlign: 'center',
-    marginLeft: '8px'
-  }
+    backgroundColor: "red",
+    width: "30px",
+    height: "30px",
+    borderRadius: "15px",
+    lineHeight: "30px",
+    textAlign: "center",
+    marginLeft: "8px",
+  },
 };
 
 let menuList = [
   {
-    key: 'banner',
+    key: "banner",
     img: Images.carousel,
-    title: '輪播圖管理'
+    title: "輪播圖管理",
   },
   {
-    key: 'home',
+    key: "home",
     img: Images.store,
-    title: '首頁'
+    title: "首頁",
   },
   {
-    key: 'news',
+    key: "news",
     img: Images.notice,
-    title: '最新消息'
+    title: "最新消息",
   },
   {
-    key: 'course',
+    key: "course",
     img: Images.article,
-    title: '課程資訊(EMIPD)'
+    title: "課程資訊(EMIPD)",
   },
   {
-    key: 'course2',
+    key: "course2",
     img: Images.article,
-    title: '課程資訊(ESPPD)'
+    title: "課程資訊(ESPPD)",
   },
   {
-    key: 'course3',
+    key: "course3",
     img: Images.article,
-    title: '課程資訊(漢學EMIPD)'
+    title: "課程資訊(漢學EMIPD)",
   },
   {
-    key: 'activity',
+    key: "activity",
     img: Images.activity,
-    title: '活動花絮(EMIPD)'
+    title: "活動花絮(EMIPD)",
   },
   {
-    key: 'activity2',
+    key: "activity2",
     img: Images.activity,
-    title: '活動花絮(ESPPD)'
+    title: "活動花絮(ESPPD)",
   },
   {
-    key: 'activity3',
+    key: "activity3",
     img: Images.activity,
-    title: '活動花絮(漢學EMIPD)'
+    title: "活動花絮(漢學EMIPD)",
   },
   {
-    key: 'resource',
+    key: "resource",
     img: Images.admin,
-    title: '資源分享'
+    title: "資源分享",
   },
   {
-    key: 'store',
+    key: "store",
     img: Images.store,
-    title: '關於中心(EMIPD)'
+    title: "關於中心(EMIPD)",
   },
   {
-    key: 'store2',
+    key: "store2",
     img: Images.store,
-    title: '關於中心(ESPPD)'
+    title: "關於中心(ESPPD)",
   },
   {
-    key: 'store3',
+    key: "store3",
     img: Images.store,
-    title: '關於中心(漢學EMIPD)'
+    title: "關於中心(漢學EMIPD)",
   },
   {
-    key: 'about',
+    key: "academic",
+    img: Images.article,
+    title: "學術發表",
+  },
+  {
+    key: "about",
     img: Images.store,
-    title: '聯絡我們'
+    title: "聯絡我們",
   },
   {
-    key: 'contact',
+    key: "contact",
     img: Images.form,
-    title: '聯絡表單回應'
+    title: "聯絡表單回應",
   },
   {
-    key: 'manager',
+    key: "manager",
     img: Images.admin,
-    title: '管理員'
+    title: "管理員",
   },
   // {
   //   key: 'user',
@@ -203,10 +217,9 @@ let menuList = [
   //   img: Images.mail,
   //   title: '系統信件管理'
   // },
-
 ];
 
-const normFile = e => {
+const normFile = (e) => {
   let list = e.fileList;
   if (list.length >= 2) {
     list.slice(1);
@@ -228,16 +241,16 @@ class HomeLayout extends React.Component {
     super(props);
     this.state = {
       collapsed: false,
-      currentKey: '',
+      currentKey: "",
       viewModalVisible: false,
       viewPwdModalVisible: false,
       ImageData: [],
       isLoading: false,
       headerData: {},
-      key: '',
+      key: "",
       isOpen: true,
-      userId: '',
-      adminData: {}
+      userId: "",
+      adminData: {},
     };
   }
   static propTypes = {
@@ -251,23 +264,23 @@ class HomeLayout extends React.Component {
     this.showRoute();
     window.addEventListener("hashchange", this.showRoute, false);
 
-    window.addEventListener('resize', this.handleUpdateSize);
+    window.addEventListener("resize", this.handleUpdateSize);
     this.handleUpdateSize();
 
     this.setState({
       isLoading: true,
-    })
+    });
 
     const callback = (value) => {
       this.setState({
         isLoading: false,
         userId: value.user_id,
-        adminData: value
-      })
-    }
+        adminData: value,
+      });
+    };
 
     getAdmin(user.user_id, callback, this.errorCallback);
-  }
+  };
 
   componentWillUnmount() {
     window.removeEventListener("hashchange", this.showRoute, false);
@@ -275,87 +288,90 @@ class HomeLayout extends React.Component {
 
   handleUpdateSize = (value) => {
     const { handleChangeScreenSize } = this.props;
-    handleChangeScreenSize(document.documentElement.clientHeight, document.documentElement.clientWidth);
-  }
+    handleChangeScreenSize(
+      document.documentElement.clientHeight,
+      document.documentElement.clientWidth
+    );
+  };
 
   showRoute = () => {
-    if (window.location.hash.indexOf('banner') > -1) {
+    if (window.location.hash.indexOf("banner") > -1) {
       this.setState({
-        key: 'banner',
+        key: "banner",
       });
-    } else if (window.location.hash.indexOf('home') > -1) {
+    } else if (window.location.hash.indexOf("home") > -1) {
       this.setState({
-        key: 'home',
+        key: "home",
       });
-    } else if (window.location.hash.indexOf('about') > -1) {
+    } else if (window.location.hash.indexOf("about") > -1) {
       this.setState({
-        key: 'about',
+        key: "about",
       });
-    } else if (window.location.hash.indexOf('news') > -1) {
+    } else if (window.location.hash.indexOf("news") > -1) {
       this.setState({
-        key: 'news',
+        key: "news",
       });
-    } else if (window.location.hash.indexOf('manager') > -1) {
+    } else if (window.location.hash.indexOf("manager") > -1) {
       this.setState({
-        key: 'manager',
+        key: "manager",
       });
-    } else if (window.location.hash.indexOf('user') > -1) {
+    } else if (window.location.hash.indexOf("user") > -1) {
       this.setState({
-        key: 'user',
+        key: "user",
       });
-    } else if (window.location.hash.indexOf('course3') > -1) {
+    } else if (window.location.hash.indexOf("course3") > -1) {
       this.setState({
-        key: 'course3',
+        key: "course3",
       });
-    } else if (window.location.hash.indexOf('course2') > -1) {
+    } else if (window.location.hash.indexOf("course2") > -1) {
       this.setState({
-        key: 'course2',
+        key: "course2",
       });
-    } else if (window.location.hash.indexOf('course') > -1) {
+    } else if (window.location.hash.indexOf("course") > -1) {
       this.setState({
-        key: 'course',
+        key: "course",
       });
-    } else if (window.location.hash.indexOf('activity3') > -1) {
+    } else if (window.location.hash.indexOf("activity3") > -1) {
       this.setState({
-        key: 'activity3',
+        key: "activity3",
       });
-    } else if (window.location.hash.indexOf('activity2') > -1) {
+    } else if (window.location.hash.indexOf("activity2") > -1) {
       this.setState({
-        key: 'activity2',
+        key: "activity2",
       });
-    } else if (window.location.hash.indexOf('activity') > -1) {
+    } else if (window.location.hash.indexOf("activity") > -1) {
       this.setState({
-        key: 'activity',
+        key: "activity",
       });
-    } else if (window.location.hash.indexOf('store3') > -1) {
+    } else if (window.location.hash.indexOf("store3") > -1) {
       this.setState({
-        key: 'store3',
+        key: "store3",
       });
-    } else if (window.location.hash.indexOf('store2') > -1) {
+    } else if (window.location.hash.indexOf("store2") > -1) {
       this.setState({
-        key: 'store2',
+        key: "store2",
       });
-    } else if (window.location.hash.indexOf('store') > -1) {
+    } else if (window.location.hash.indexOf("store") > -1) {
       this.setState({
-        key: 'store',
+        key: "store",
       });
-    } else if (window.location.hash.indexOf('contact') > -1) {
+    } else if (window.location.hash.indexOf("contact") > -1) {
       this.setState({
-        key: 'contact',
+        key: "contact",
       });
     } else {
       this.setState({
-        key: 'banner',
+        key: "banner",
       });
     }
-  }
+  };
 
   changeRoute = (route) => {
     this.setState({
       key: route,
     });
     hashHistory.push(`/${route}`);
-  }
+  };
 
   handleUpdate = (value) => {
     const { updateAdmin, admin } = this.props;
@@ -365,27 +381,30 @@ class HomeLayout extends React.Component {
       this.setState({
         isLoading: false,
         viewModalVisible: false,
-        adminData: value
+        adminData: value,
       });
-    }
+    };
 
     let payload = {
       ...admin,
-      ...value
-    }
+      ...value,
+    };
 
-    this.setState({
-      isLoading: true
-    }, () => {
-      updateAdmin(payload, callback, this.errorCallback);
-    });
-  }
+    this.setState(
+      {
+        isLoading: true,
+      },
+      () => {
+        updateAdmin(payload, callback, this.errorCallback);
+      }
+    );
+  };
 
   errorCallback = () => {
     this.setState({
       isLoading: false,
     });
-  }
+  };
 
   handleUpdatePwd = (value) => {
     const { changePassword, user } = this.props;
@@ -395,37 +414,40 @@ class HomeLayout extends React.Component {
         isLoading: false,
         viewPwdModalVisible: false,
       });
-    }
+    };
     let newData = {
       user_id: user.user_id,
       old_password: value.old_password,
-      new_password: value.new_password
-    }
+      new_password: value.new_password,
+    };
 
-    this.setState({
-      isLoading: true
-    }, () => {
-      changePassword(newData, callback, this.errorCallback, user.Token);
-    });
-  }
+    this.setState(
+      {
+        isLoading: true,
+      },
+      () => {
+        changePassword(newData, callback, this.errorCallback, user.Token);
+      }
+    );
+  };
 
   handleClick = () => {
-    const { setToken, } = this.props;
+    const { setToken } = this.props;
 
     Swal.fire({
-      title: '是否要登出',
-      icon: 'warning',
+      title: "是否要登出",
+      icon: "warning",
       showCancelButton: true,
-      cancelButtonText: '取消',
-      confirmButtonText: '確定',
+      cancelButtonText: "取消",
+      confirmButtonText: "確定",
     }).then((result) => {
       if (result.value) {
         removeUserInformation();
-        setToken('');
+        setToken("");
         window.location.reload();
       }
-    })
-  }
+    });
+  };
 
   toggle = () => {
     this.setState({
@@ -436,7 +458,7 @@ class HomeLayout extends React.Component {
   handleMenuClick = (item) => {
     this.setState({ currentKey: item.key });
     hashHistory.push(item.key);
-  }
+  };
 
   renderUserModal = () => {
     const { admin } = this.props;
@@ -452,10 +474,10 @@ class HomeLayout extends React.Component {
         footer={null}
       >
         <Form
-          name='basic'
+          name="basic"
           initialValues={{ ...adminData }}
           onFinish={this.handleUpdate}
-          style={{ color: '#7D9EB5' }}
+          style={{ color: "#7D9EB5" }}
         >
           <p>帳號：{admin.account}</p>
           <FormInput
@@ -468,15 +490,22 @@ class HomeLayout extends React.Component {
             wrapperCol={24}
             inputStyle={styles.inputStyle}
           />
-          <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: '50px' }}>
-            <Button style={styles.btnStyle} htmlType='submit'>
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "50px",
+            }}
+          >
+            <Button style={styles.btnStyle} htmlType="submit">
               確定
             </Button>
           </div>
         </Form>
       </Modal>
-    )
-  }
+    );
+  };
 
   renderPwdModal = () => {
     const { viewPwdModalVisible } = this.state;
@@ -491,10 +520,10 @@ class HomeLayout extends React.Component {
         footer={null}
       >
         <Form
-          name='basic'
+          name="basic"
           initialValues={{}}
           onFinish={this.handleUpdatePwd}
-          style={{ color: '#7D9EB5' }}
+          style={{ color: "#7D9EB5" }}
         >
           <Form.Item
             name="old_password"
@@ -502,10 +531,10 @@ class HomeLayout extends React.Component {
             label="舊密碼"
             labelCol={{ span: 24 }}
             wrapperCol={{ span: 24 }}
-            rules={[{ required: true, message: '請輸入舊密碼' }]}
+            rules={[{ required: true, message: "請輸入舊密碼" }]}
           >
             <Input.Password
-              placeholder='請輸入舊密碼'
+              placeholder="請輸入舊密碼"
               style={styles.inputStyle}
             />
           </Form.Item>
@@ -515,10 +544,10 @@ class HomeLayout extends React.Component {
             label="新密碼"
             labelCol={{ span: 24 }}
             wrapperCol={{ span: 24 }}
-            rules={[{ required: true, message: '請輸入新密碼' }]}
+            rules={[{ required: true, message: "請輸入新密碼" }]}
           >
             <Input.Password
-              placeholder='請輸入新密碼'
+              placeholder="請輸入新密碼"
               style={styles.inputStyle}
             />
           </Form.Item>
@@ -528,48 +557,57 @@ class HomeLayout extends React.Component {
             label="確認新密碼"
             labelCol={{ span: 24 }}
             wrapperCol={{ span: 24 }}
-            rules={[{ required: true, message: '請輸入新密碼' }]}
+            rules={[{ required: true, message: "請輸入新密碼" }]}
             rules={[
-              ({ getFieldValue }) =>
-              ({
+              ({ getFieldValue }) => ({
                 validator(_, value) {
-                  if (getFieldValue('new_password') != value && value == null) {
-                    return Promise.reject(new Error('此欄位不可為空！'));
-                  } else if (!value || getFieldValue('new_password') === value) {
+                  if (getFieldValue("new_password") != value && value == null) {
+                    return Promise.reject(new Error("此欄位不可為空！"));
+                  } else if (
+                    !value ||
+                    getFieldValue("new_password") === value
+                  ) {
                     return Promise.resolve();
                   }
-                  return Promise.reject(new Error('與新密碼不一致'));
+                  return Promise.reject(new Error("與新密碼不一致"));
                 },
               }),
             ]}
           >
             <Input.Password
-              placeholder='請輸入確認密碼'
+              placeholder="請輸入確認密碼"
               style={styles.inputStyle}
             />
           </Form.Item>
-          <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: '100px' }}>
-            <Button style={styles.btnStyle} htmlType='submit'>
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "100px",
+            }}
+          >
+            <Button style={styles.btnStyle} htmlType="submit">
               確定
             </Button>
           </div>
         </Form>
       </Modal>
-    )
-  }
+    );
+  };
 
   closeModal() {
     this.setState({
       viewModalVisible: false,
       viewPwdModalVisible: false,
-    })
+    });
   }
 
   handleAvatarChange = ({ fileList: newFileList }) => {
     if (newFileList.length > 1) {
-      this.setFileList('ImageData', newFileList.splice(1, 1));
+      this.setFileList("ImageData", newFileList.splice(1, 1));
     } else {
-      this.setFileList('ImageData', newFileList);
+      this.setFileList("ImageData", newFileList);
     }
   };
 
@@ -577,79 +615,129 @@ class HomeLayout extends React.Component {
     this.setState({
       [key]: file,
     });
-  }
+  };
 
   render() {
-    const { children, user, admin = { name: '' }, noticeList } = this.props;
-    const { viewModalVisible, viewPwdModalVisible, key, isOpen, userId, adminData } = this.state;
+    const { children, user, admin = { name: "" }, noticeList } = this.props;
+    const {
+      viewModalVisible,
+      viewPwdModalVisible,
+      key,
+      isOpen,
+      userId,
+      adminData,
+    } = this.state;
 
     if (!isEmpty(admin)) {
-      if (admin.role_id !== 'M001') {
-        menuList = menuList.filter((item) => item.title !== '管理員');
+      if (admin.role_id !== "M001") {
+        menuList = menuList.filter((item) => item.title !== "管理員");
       }
     }
 
-    if (key === '') return null;
+    if (key === "") return null;
 
     let menu = (
       <Menu>
-        <Menu.Item key="0" onClick={() => this.setState({ viewModalVisible: true })}>
-          <span style={{ display: 'flex', justifyContent: 'center' }}>帳號設定</span>
+        <Menu.Item
+          key="0"
+          onClick={() => this.setState({ viewModalVisible: true })}
+        >
+          <span style={{ display: "flex", justifyContent: "center" }}>
+            帳號設定
+          </span>
         </Menu.Item>
         <Menu.Divider />
-        <Menu.Item key="1" onClick={() => this.setState({ viewPwdModalVisible: true })}>
-          <span style={{ display: 'flex', justifyContent: 'center' }}>變更密碼</span>
+        <Menu.Item
+          key="1"
+          onClick={() => this.setState({ viewPwdModalVisible: true })}
+        >
+          <span style={{ display: "flex", justifyContent: "center" }}>
+            變更密碼
+          </span>
         </Menu.Item>
         <Menu.Divider />
-        <Menu.Item key="3" onClick={this.handleClick} >
-          <span style={{ display: 'flex', justifyContent: 'center' }}>登出</span>
+        <Menu.Item key="3" onClick={this.handleClick}>
+          <span style={{ display: "flex", justifyContent: "center" }}>
+            登出
+          </span>
         </Menu.Item>
       </Menu>
     );
 
     return (
-      <Layout style={{ width: '100vw', height: '100vh' }}>
-        <Sider trigger={null} collapsible collapsed={this.state.collapsed} width={240} style={{ overflowY: 'auto' }}>
+      <Layout style={{ width: "100vw", height: "100vh" }}>
+        <Sider
+          trigger={null}
+          collapsible
+          collapsed={this.state.collapsed}
+          width={240}
+          style={{ overflowY: "auto" }}
+        >
           <div className="logo"></div>
           <Menu
             theme="dark"
             mode="inline"
             defaultSelectedKeys={[key]}
-            style={{ marginTop: '65px' }}
+            style={{ marginTop: "65px" }}
           >
-            {
-              menuList.map((item) => {
-                return (
-                  <Menu.Item
-                    onClick={() => this.changeRoute(item.key)}
-                    key={item.key}
-                    icon={<img src={item.img} style={{ width: '20px', marginRight: '10px' }} />}
-                  >
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                      {item.title}{_.has(noticeList, item.key) && <div style={styles.noticeStyle}>{noticeList[item.key]}</div>}
-                    </div>
-                  </Menu.Item>
-                )
-              })
-            }
-
+            {menuList.map((item) => {
+              return (
+                <Menu.Item
+                  onClick={() => this.changeRoute(item.key)}
+                  key={item.key}
+                  icon={
+                    <img
+                      src={item.img}
+                      style={{ width: "20px", marginRight: "10px" }}
+                    />
+                  }
+                >
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    {item.title}
+                    {_.has(noticeList, item.key) && (
+                      <div style={styles.noticeStyle}>
+                        {noticeList[item.key]}
+                      </div>
+                    )}
+                  </div>
+                </Menu.Item>
+              );
+            })}
           </Menu>
         </Sider>
 
         <Layout className="site-layout">
-          <Header className="site-layout-background-top" style={{ padding: 0, boxShadow: '0px 2px 10px #859DB1' }}>
+          <Header
+            className="site-layout-background-top"
+            style={{ padding: 0, boxShadow: "0px 2px 10px #859DB1" }}
+          >
             {React.createElement(MenuOutlined, {
-              className: 'trigger',
+              className: "trigger",
               onClick: this.toggle,
             })}
             <div style={styles.infoStyle}>
-              <Dropdown overlay={menu} trigger={['click']}>
-                <a className="ant-dropdown-link" style={{ display: 'flex', alignItems: 'center' }}>
-                  <div style={{ width: '35px', height: '35px', overflow: 'hidden', marginRight: '10px', display: 'flex', borderRadius: '50%' }}>
-                    <img src={Images.adminPhoto} style={{ width: '100%', height: '100%' }} />
+              <Dropdown overlay={menu} trigger={["click"]}>
+                <a
+                  className="ant-dropdown-link"
+                  style={{ display: "flex", alignItems: "center" }}
+                >
+                  <div
+                    style={{
+                      width: "35px",
+                      height: "35px",
+                      overflow: "hidden",
+                      marginRight: "10px",
+                      display: "flex",
+                      borderRadius: "50%",
+                    }}
+                  >
+                    <img
+                      src={Images.adminPhoto}
+                      style={{ width: "100%", height: "100%" }}
+                    />
                   </div>
                   {admin.name}
-                  <DownOutlined style={{ marginLeft: '10px' }} />
+                  <DownOutlined style={{ marginLeft: "10px" }} />
                 </a>
               </Dropdown>
             </div>
@@ -657,9 +745,9 @@ class HomeLayout extends React.Component {
           <Content
             className="site-layout-background-content"
             style={{
-              padding: '30px 20px',
+              padding: "30px 20px",
               minHeight: 280,
-              overflowY: 'auto'
+              overflowY: "auto",
             }}
           >
             {children}
@@ -667,7 +755,7 @@ class HomeLayout extends React.Component {
         </Layout>
         {viewModalVisible && this.renderUserModal()}
         {viewPwdModalVisible && this.renderPwdModal()}
-      </Layout >
+      </Layout>
     );
   }
 }
@@ -689,6 +777,6 @@ export default connect(
         getUserInfo: UserActions.getUserInfo,
         getAdmin: UserActions.getAdmin,
       },
-      dispatch,
-    ),
+      dispatch
+    )
 )(HomeLayout);

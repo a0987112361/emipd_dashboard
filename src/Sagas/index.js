@@ -26,6 +26,7 @@ import * as OrderSaga from "./OrderSaga";
 import * as MailSaga from "./MailSaga";
 import * as QASaga from "./QASaga";
 import * as HomeSaga from "./HomeSaga";
+import * as AcademicSaga from "./AcademicSaga";
 
 import { ManagerTypes } from "src/Stores/Manager/Actions";
 import { UserTypes } from "src/Stores/User/Actions";
@@ -53,6 +54,7 @@ import { OrderTypes } from "src/Stores/Order/Actions";
 import { MailTypes } from "src/Stores/Mail/Actions";
 import { QATypes } from "src/Stores/QA/Actions";
 import { HomeTypes } from "src/Stores/Home/Actions";
+import { AcademicTypes } from "src/Stores/Academic/Actions";
 
 export default function* root() {
   yield all([
@@ -333,5 +335,9 @@ export default function* root() {
     takeLatest(ContactTypes.GET_CONTACT_INFO, ContactSaga.getContactInfo),
     takeLatest(ContactTypes.UPDATE_CONTACT, ContactSaga.updateContact),
     takeLatest(ContactTypes.DELETE_CONTACT, ContactSaga.deleteContact),
+
+    // Academic
+    takeLatest(AcademicTypes.GET_ACADEMIC, AcademicSaga.getAcademic),
+    takeLatest(AcademicTypes.UPDATE_ACADEMIC, AcademicSaga.updateAcademic),
   ]);
 }
