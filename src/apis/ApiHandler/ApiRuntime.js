@@ -1,18 +1,17 @@
-import axios from 'axios';
+import axios from "axios";
 
-import {
-} from '../../Stores';
+import {} from "../../Stores";
 
-import { DefaultSuccessHandler, DefaultErrorHandler } from './DefaultHandler';
+import { DefaultSuccessHandler, DefaultErrorHandler } from "./DefaultHandler";
 
 const Runtime = async ({ url, method, options = {} }) => {
   let {
     params = {}, // query params
     data = undefined, // body data
-    Authorization = '',
+    Authorization = "",
     successHandler = undefined,
     finallyHandler = undefined,
-    ContentType = 'application/json',
+    ContentType = "application/json",
     header = {},
   } = options;
   try {
@@ -31,17 +30,25 @@ const Runtime = async ({ url, method, options = {} }) => {
           Authorization: `${Authorization}`,
         }),
         ...(ContentType && {
-          'Content-Type': ContentType,
+          "Content-Type": ContentType,
         }),
         ...header,
       },
     });
 
-    const res = ['patch', 'post', 'put'].includes(method)
-      ? await instance[method](url, data, { params })
-      : await instance[method](url, { params, data });
+    let res;
+    if (["patch", "post", "put"].includes(method)) {
+      res = await instance[method](url, data, { params });
+    } else if (method === "delete") {
+      res = await instance.delete(url, {
+        params,
+        data, // axios 支援 data in delete config
+      });
+    } else {
+      res = await instance[method](url, { params, data });
+    }
 
-    if (typeof successHandler === 'function') {
+    if (typeof successHandler === "function") {
       await successHandler(res);
     }
     await DefaultSuccessHandler(res);
@@ -60,7 +67,7 @@ const Runtime = async ({ url, method, options = {} }) => {
     // throw error in the end
     throw errorObject;
   } finally {
-    if (typeof finallyHandler === 'function') {
+    if (typeof finallyHandler === "function") {
       await finallyHandler();
     }
   }
